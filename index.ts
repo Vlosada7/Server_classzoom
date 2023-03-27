@@ -9,7 +9,7 @@ import { Server } from 'colyseus';
 import { createServer } from 'http';
 import { WebSocketTransport } from '@colyseus/ws-transport';
 
-const PORT = Number(process.env.PORT) || 3001;
+const PORT = process.env.PORT || 3030;
 
 const gamePort = 4001;
 

@@ -36,7 +36,7 @@ const MySchool_1 = require("./colyseus/MySchool");
 const colyseus_1 = require("colyseus");
 const http_1 = require("http");
 const ws_transport_1 = require("@colyseus/ws-transport");
-const PORT = Number(process.env.PORT) || 3001;
+const PORT = process.env.PORT || 3030;
 const gamePort = 4001;
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
