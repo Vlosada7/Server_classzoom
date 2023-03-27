@@ -8,8 +8,8 @@
     "lint:fix": "npx eslint . --fix",
     "start:ts": "tsc -w",
     "start:js": "nodemon dist/index.js",
-    "start": "concurrently npm:start:*",
-    "production": "node ./dist/index.js",
+    "production": "concurrently npm:start:*",
+    "start": "node ./dist/index.js",
     "build":"rm -rf ./dist && tsc",
     "start:game": "ts-node-dev --respawn --transpile-only index.ts"
   },
