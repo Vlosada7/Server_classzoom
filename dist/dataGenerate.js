@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateDatabase = void 0;
 const database_1 = require("./database");
-function generateDatabase(res) {
+function generateDatabase() {
     return __awaiter(this, void 0, void 0, function* () {
         const newSchool = yield database_1.prisma.school.create({
             data: {
@@ -146,7 +146,6 @@ function generateDatabase(res) {
                 },
             ],
         });
-        res.status(201).send('DB populated');
     });
 }
 exports.generateDatabase = generateDatabase;
