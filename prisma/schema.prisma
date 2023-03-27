@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres@localhost:5432/thesis-project?schema=classzoom"
+}
+
+model School {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  email    String    @unique
+  users    User[]
+  subjects Subject[]
+}
+
+model User {
+  id        String   @id @default(uuid())
+  firstName String
+  lastName  String
+  email     String   @unique
+  username  String   @unique
+  avatar    String?
+  student   Boolean
+  school    School?  @relation(fields: [schoolId], references: [id])
+  schoolId  String
+  lessons   Lesson[]
+  library   Library?
+}
+
+model Subject {
+  id       String   @id @default(uuid())
+  name     String
+  lessons  Lesson[]
+  school   School   @relation(fields: [schoolId], references: [id])
+  schoolId String
+
+  @@unique([name, schoolId])
+}
+
+model Lesson {
+  id            String      @id @default(uuid())
+  name          String
+  createdAt     DateTime    @default(now())
+  scheduledDate String
+  video         String?
+  drawing       String?
+  subject       Subject     @relation(fields: [subjectId], references: [id])
+  subjectId     String
+  librarys      Library[]
+  users         User[]
+  notes         NoteBook[]
+  whiteboard    Whiteboard?
+
+  @@unique([name, subjectId])
+}
+
+model Library {
+  id      String     @id @default(uuid())
+  lessons Lesson[]
+  user    User       @relation(fields: [userId], references: [id])
+  userId  String     @unique
+  Notes   NoteBook[]
+}
+
+model NoteBook {
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  note      String?
+  library   Library  @relation(fields: [libraryId], references: [id])
+  libraryId String
+  lesson    Lesson   @relation(fields: [lessonId], references: [id])
+  lessonId  String
+
+  @@id([libraryId, lessonId])
+  @@unique([name, libraryId])
+}
+
+model Whiteboard {
+  uuid      String  @id
+  teamUUID  String
+  appUUID   String
+  isBan     Boolean
+  createdAt String
+  limit     Int
+  token     String? @unique
+  lesson    Lesson? @relation(fields: [lessonId], references: [id])
+  lessonId  String? @unique
+}
+
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
