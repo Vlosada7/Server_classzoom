@@ -9,7 +9,7 @@ import { Server } from 'colyseus';
 import { createServer } from 'http';
 import { WebSocketTransport } from '@colyseus/ws-transport';
 
-const PORT = process.env.PORT || 3030;
+const PORT = 3030;
 
 const gamePort = 4001;
 
@@ -31,11 +31,10 @@ gameServer.define('my_school', MySchool);
 app.use('/colyseus', monitor());
 
 gameServer.listen(gamePort);
-
 app.use('/', (req, res) => {
   console.log('Just got a request!');
   res.send('Yo!');
-})
+});
 
 app.listen(PORT, () =>
   console.log(`Server running at http://localhost:${PORT}`)
