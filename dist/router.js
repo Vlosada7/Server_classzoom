@@ -31,6 +31,7 @@ const lessonController = __importStar(require("./controllers/lesson.controller")
 const libraryController = __importStar(require("./controllers/library.controller"));
 const noteBookController = __importStar(require("./controllers/noteBook.controller"));
 const whiteboardController = __importStar(require("./controllers/whiteboard.controller"));
+const dataGenerate_1 = require("./dataGenerate");
 const router = (0, express_1.Router)();
 //user routes
 router.post('/user', userController.createUser);
@@ -63,4 +64,6 @@ router.put('/noteBook', noteBookController.updateNote);
 //whiteboard routes
 router.post('/whiteboard/:lessonId', whiteboardController.createWhiteboard);
 router.put('/whiteboard/:lessonId', whiteboardController.addToken);
+//Populate db
+router.post('/populate', dataGenerate_1.generateDatabase);
 exports.default = router;

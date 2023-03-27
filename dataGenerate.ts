@@ -1,6 +1,6 @@
 import { prisma } from './database';
 
-async function generateDatabase () {
+export async function generateDatabase () {
   const newSchool = await prisma.school.create({
     data: {
       name: 'Code',
@@ -137,12 +137,12 @@ async function generateDatabase () {
   });
 }
 
-generateDatabase()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+// generateDatabase()
+//   .then(async () => {
+//     await prisma.$disconnect();
+//   })
+//   .catch(async (e) => {
+//     console.error(e);
+//     await prisma.$disconnect();
+//     process.exit(1);
+//   });

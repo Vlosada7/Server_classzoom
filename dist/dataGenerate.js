@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.generateDatabase = void 0;
 const database_1 = require("./database");
 function generateDatabase() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -146,12 +147,13 @@ function generateDatabase() {
         });
     });
 }
-generateDatabase()
-    .then(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield database_1.prisma.$disconnect();
-}))
-    .catch((e) => __awaiter(void 0, void 0, void 0, function* () {
-    console.error(e);
-    yield database_1.prisma.$disconnect();
-    process.exit(1);
-}));
+exports.generateDatabase = generateDatabase;
+// generateDatabase()
+//   .then(async () => {
+//     await prisma.$disconnect();
+//   })
+//   .catch(async (e) => {
+//     console.error(e);
+//     await prisma.$disconnect();
+//     process.exit(1);
+//   });
