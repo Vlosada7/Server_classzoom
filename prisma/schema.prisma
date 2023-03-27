@@ -6,7 +6,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "DATABASE_URL"
+  url      = "postgres://dsbjyazj:kzEJCDFVyllTjXcVZ1gMC5xEoHsqNW5E@trumpet.db.elephantsql.com/dsbjyazj"
 }
 
 model School {
