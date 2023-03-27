@@ -1,6 +1,7 @@
 import { prisma } from './database';
+import { Response } from 'express';
 
-async function generateDatabase () {
+async function generateDatabase (res: Response) {
   const newSchool = await prisma.school.create({
     data: {
       id: '1',
@@ -136,6 +137,7 @@ async function generateDatabase () {
       },
     ],
   });
+  res.status(201).send('DB populated');
 }
 
 export {generateDatabase};
