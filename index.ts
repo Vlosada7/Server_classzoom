@@ -32,6 +32,11 @@ app.use('/colyseus', monitor());
 
 gameServer.listen(gamePort);
 
+app.use('/', (req, res) => {
+  console.log('Just got a request!');
+  res.send('Yo!');
+})
+
 app.listen(PORT, () =>
   console.log(`Server running at http://localhost:${PORT}`)
 );

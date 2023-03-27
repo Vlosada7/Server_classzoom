@@ -52,4 +52,8 @@ const gameServer = new colyseus_1.Server({
 gameServer.define('my_school', MySchool_1.MySchool);
 app.use('/colyseus', (0, monitor_1.monitor)());
 gameServer.listen(gamePort);
+app.use('/', (req, res) => {
+    console.log('Just got a request!');
+    res.send('Yo!');
+});
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
