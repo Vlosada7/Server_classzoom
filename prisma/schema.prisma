@@ -1,6 +1,5 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -68,7 +67,7 @@ model Library {
 }
 
 model NoteBook {
-  name      String
+  name      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   note      String?
@@ -89,8 +88,8 @@ model Whiteboard {
   createdAt String
   limit     Int
   token     String? @unique
-  lesson    Lesson? @relation(fields: [lessonId], references: [id])
-  lessonId  String? @unique
+  lesson    Lesson  @relation(fields: [lessonId], references: [id])
+  lessonId  String  @unique
 }
 
 generator dbml {
