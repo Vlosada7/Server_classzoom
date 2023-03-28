@@ -26,13 +26,10 @@ const createSubject = async (req: Request, res: Response) => {
 const getSubjects = async (req: Request, res: Response) => {
   const {id} = req.params;
   try {
-    const subjects = await prisma.school.findMany({
+    const subjects = await prisma.subject.findMany({
       where: {
-        id: id,
+        schoolId: id,
       },
-      include: {
-        subjects: true
-      } 
     });
     res.status(200);
     res.send(subjects);
@@ -44,7 +41,6 @@ const getSubjects = async (req: Request, res: Response) => {
 
 const deleteSubject = async (req: Request, res: Response) => {
   const subjectId = req.params.subjectId;
-  console.log(req.params.id);
   try {
     await prisma.lesson.deleteMany({
       where: {

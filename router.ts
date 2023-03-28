@@ -5,8 +5,9 @@ import * as subjectController from './controllers/subject.controller';
 import * as lessonController from './controllers/lesson.controller';
 import * as libraryController from './controllers/library.controller';
 import * as noteBookController from './controllers/noteBook.controller';
-import * as whiteboardController from './controllers/whiteboard.controller';
-import { generateDatabase } from './dataGenerate';
+import * as roomTokenController from './controllers/interactiveWhiteboard/roomToken.controller';
+
+import { generateDatabase } from './populate';
 
 const router = Router();
 
@@ -34,10 +35,7 @@ router.put('/lesson/:lessonId', lessonController.updateLesson);
 //library routes - post library automatically created when user is created
 router.get('/library/:userId', libraryController.getLessons);
 router.get('/library/:userId/:lessonId', libraryController.getLesson);
-router.delete(
-  '/library/:userId/:lessonId',
-  libraryController.deleteLessonFromLibrary
-);
+router.delete('/library/:userId/:lessonId', libraryController.deleteLessonFromLibrary);
 router.put('/library/:userId/:lessonId', libraryController.addLessonId);
 
 //noteBook routes
@@ -48,10 +46,16 @@ router.delete('/noteBook/:userId/:lessonId', noteBookController.deleteNote);
 router.put('/noteBook', noteBookController.updateNote);
 
 //whiteboard routes
-router.post('/whiteboard/:lessonId', whiteboardController.createWhiteboard);
-router.put('/whiteboard/:lessonId', whiteboardController.addToken);
+// router.post('/whiteboard/:lessonId', whiteboardController.createWhiteboard);
+// router.put('/whiteboard/:lessonId', whiteboardController.addToken);
+// router.get('/whiteboard/:lessonId', whiteboardController.getToken);
 
-//Populate db
+//Agora Whiteboardroom Token
+router.get('/roomToken/teacher/:lessonId', roomTokenController.createOrGetToken); // for the teacher
+router.get('/roomToken/student/:lessonId', roomTokenController.getTokenForStudent); // for the student
+router.delete('/roomToken/:lessonId', roomTokenController.deleteWhiteboard);
+
+
 router.post('/populate', generateDatabase);
 
 export default router;
