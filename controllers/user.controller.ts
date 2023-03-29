@@ -3,9 +3,9 @@ import { prisma } from '../database';
 
 
 const createUser = async (req: Request, res: Response) => {
-  const { id, firstName, lastName, email, student, schoolId } = req.body;
+  const { id, firstName, lastName, email, student, schoolId, avatar } = req.body;
   const username = req.body.username.toLowerCase().trim();
-  if (firstName && lastName && email && username && student !== undefined && schoolId) {
+  if (firstName && lastName && email && username && student !== undefined && schoolId && avatar) {
     try {
       const newUser = await prisma.user.create({
         data: {
@@ -16,6 +16,7 @@ const createUser = async (req: Request, res: Response) => {
           username,
           student, 
           schoolId,
+          avatar
         }
       });
       const library = {
