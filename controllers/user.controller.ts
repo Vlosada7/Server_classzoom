@@ -88,4 +88,22 @@ const updateUser = async (req: Request, res: Response) => {
   }
 };
 
-export { createUser, getUserById, getUserByUsername, updateUser };
+const getAllUsers = async (req: Request, res: Response) => {
+  const { schoolId } = req.params;
+  console.log('hi')
+  try {
+    const users = await prisma.user.findMany({
+      where: {
+        schoolId: schoolId
+      }, 
+    });
+    if (!users) { throw new Error(); }
+    res.send(users);
+    res.status(200);
+  } catch (error) {
+    console.error(error);
+    res.status(400).send({ error: 'School not found' });
+  }
+};
+
+export { createUser, getUserById, getUserByUsername, updateUser,getAllUsers };

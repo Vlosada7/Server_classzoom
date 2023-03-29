@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUser = exports.getUserByUsername = exports.getUserById = exports.createUser = void 0;
+exports.getAllUsers = exports.updateUser = exports.getUserByUsername = exports.getUserById = exports.createUser = void 0;
 const database_1 = require("../database");
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id, firstName, lastName, email, student, schoolId } = req.body;
@@ -104,3 +104,24 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.updateUser = updateUser;
+const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { schoolId } = req.params;
+    console.log('hi');
+    try {
+        const users = yield database_1.prisma.user.findMany({
+            where: {
+                schoolId: schoolId
+            },
+        });
+        if (!users) {
+            throw new Error();
+        }
+        res.send(users);
+        res.status(200);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(400).send({ error: 'School not found' });
+    }
+});
+exports.getAllUsers = getAllUsers;
