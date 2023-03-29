@@ -37,6 +37,7 @@ router.get('/library/:userId', libraryController.getLessons);
 router.get('/library/:userId/:lessonId', libraryController.getLesson);
 router.delete('/library/:userId/:lessonId', libraryController.deleteLessonFromLibrary);
 router.put('/library/:userId/:lessonId', libraryController.addLessonId);
+router.get('/lesson/school/:schoolId', lessonController.getAllLessons);
 
 //noteBook routes
 router.post('/noteBook', noteBookController.createNote);

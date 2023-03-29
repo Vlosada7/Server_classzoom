@@ -55,16 +55,13 @@ router.get('/library/:userId', libraryController.getLessons);
 router.get('/library/:userId/:lessonId', libraryController.getLesson);
 router.delete('/library/:userId/:lessonId', libraryController.deleteLessonFromLibrary);
 router.put('/library/:userId/:lessonId', libraryController.addLessonId);
+router.get('/lesson/school/:schoolId', lessonController.getAllLessons);
 //noteBook routes
 router.post('/noteBook', noteBookController.createNote);
 router.get('/noteBook/:userId/:lessonId', noteBookController.getOneLessonNote);
 router.get('/noteBook/:userId', noteBookController.getAllUserNotes);
 router.delete('/noteBook/:userId/:lessonId', noteBookController.deleteNote);
 router.put('/noteBook', noteBookController.updateNote);
-//whiteboard routes
-// router.post('/whiteboard/:lessonId', whiteboardController.createWhiteboard);
-// router.put('/whiteboard/:lessonId', whiteboardController.addToken);
-// router.get('/whiteboard/:lessonId', whiteboardController.getToken);
 //Agora Whiteboardroom Token
 router.get('/roomToken/teacher/:lessonId', roomTokenController.createOrGetToken); // for the teacher
 router.get('/roomToken/student/:lessonId', roomTokenController.getTokenForStudent); // for the student

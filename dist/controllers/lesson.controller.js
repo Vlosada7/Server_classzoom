@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateLesson = exports.getLesson = exports.deleteLesson = exports.createLesson = void 0;
+exports.getAllLessons = exports.updateLesson = exports.getLesson = exports.deleteLesson = exports.createLesson = void 0;
 const database_1 = require("../database");
 const createLesson = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const name = req.body.name.toLowerCase().trim();
@@ -111,3 +111,25 @@ const updateLesson = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     res.status(201).send(updatedLesson);
 });
 exports.updateLesson = updateLesson;
+const getAllLessons = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const school = yield database_1.prisma.school.findUnique({
+            where: {
+                id: req.params.schoolId,
+            },
+            select: {
+                subjects: {
+                    select: {
+                        lessons: true
+                    }
+                }
+            }
+        });
+        res.status(200).send(school);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(404).send('Couldnt find the lessons');
+    }
+});
+exports.getAllLessons = getAllLessons;

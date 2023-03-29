@@ -34,9 +34,6 @@ const getLesson = async (req: Request, res: Response) => {
   res.status(200).send(lesson);
 };
 
-
-
-
 const deleteLesson = async (req: Request, res: Response) => {
   const lessonId = req.params.lessonId;
   try {
@@ -51,8 +48,6 @@ const deleteLesson = async (req: Request, res: Response) => {
     //     }
     //   }
     // })
-
-
     // const updateLesson = await prisma.lesson.update({
     //   where: {
     //     id: lessonId,
@@ -107,4 +102,26 @@ const updateLesson = async (req: Request, res: Response) => {
   res.status(201).send(updatedLesson);
 };
 
-export { createLesson, deleteLesson, getLesson, updateLesson };
+const getAllLessons = async (req: Request, res: Response) => {
+  try {
+    const school = await prisma.school.findUnique({
+      where: {
+        id: req.params.schoolId,
+      },
+      select:
+      {
+        subjects: {
+          select: {
+            lessons:true
+          }
+        }
+      }
+    });
+    res.status(200).send(school);
+  } catch (error) {
+    console.error(error);
+    res.status(404).send('Couldnt find the lessons');
+  }
+}; 
+
+export { createLesson, deleteLesson, getLesson, updateLesson, getAllLessons };
