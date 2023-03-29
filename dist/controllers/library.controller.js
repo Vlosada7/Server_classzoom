@@ -13,6 +13,7 @@ exports.getLesson = exports.deleteLessonFromLibrary = exports.getLessons = expor
 const database_1 = require("../database");
 const addLessonId = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { userId, lessonId } = req.params;
+    const { name } = req.body;
     try {
         const library = yield database_1.prisma.library.findUnique({
             where: {
@@ -71,6 +72,7 @@ const addLessonId = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             data: {
                 libraryId: library2.id,
                 lessonId,
+                name
             },
         });
         //----------------------------------------------------------------

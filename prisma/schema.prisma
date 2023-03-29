@@ -75,9 +75,9 @@ model NoteBook {
   libraryId String
   lesson    Lesson   @relation(fields: [lessonId], references: [id])
   lessonId  String
-  // @@unique([name, libraryId])
 
   @@id([libraryId, lessonId])
+  @@unique([name, libraryId])
 }
 
 model Whiteboard {

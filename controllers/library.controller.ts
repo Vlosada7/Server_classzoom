@@ -3,6 +3,7 @@ import { prisma } from '../database';
 
 const addLessonId = async (req: Request, res: Response) => {
   const { userId, lessonId } = req.params;
+  const { name } = req.body;
   try {
     const library = await prisma.library.findUnique({
       where: {
@@ -64,6 +65,7 @@ const addLessonId = async (req: Request, res: Response) => {
       data: {
         libraryId: library2.id,
         lessonId,
+        name
       },
     });
   
