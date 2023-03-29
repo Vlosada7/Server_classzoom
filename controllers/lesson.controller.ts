@@ -95,16 +95,43 @@ const deleteLesson = async (req: Request, res: Response) => {
 };
 
 const updateLesson = async (req: Request, res: Response) => {
-  const updatedLesson = await prisma.lesson.updateMany({
-    where: {
-      id: req.params.lessonId,
-    },
-    data: {
-      video: req.body.video,
-      drawing: req.body.drawing,
-    },
-  });
-  res.status(201).send(updatedLesson);
+  try {
+    const updatedLesson = await prisma.lesson.updateMany({
+      where: {
+        id: req.params.lessonId,
+      },
+      data: {
+        video: req.body.video,
+        drawing: req.body.drawing,
+      },
+    });
+    res.status(201).send(updatedLesson);
+  } catch (error) {
+    console.error(error);
+    res.status(404).send('Couldnt update the lesson');
+  }
 };
 
-export { createLesson, deleteLesson, getLesson, updateLesson };
+const getAllLessons = async (req: Request, res: Response) => {
+  try {
+    const school = await prisma.school.findUnique({
+      where: {
+        id: req.params.schoolId,
+      },
+      select:
+      {
+        subjects: {
+          select: {
+            lessons:true
+          }
+        }
+      }
+    });
+    res.status(200).send(school);
+  } catch (error) {
+    console.error(error);
+    res.status(404).send('Couldnt find the lessons');
+  }
+}; 
+
+export { createLesson, deleteLesson, getLesson, updateLesson, getAllLessons };

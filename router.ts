@@ -31,6 +31,7 @@ router.post('/lesson', lessonController.createLesson);
 router.get('/lesson/:lessonId', lessonController.getLesson);
 router.delete('/lesson/:lessonId', lessonController.deleteLesson);
 router.put('/lesson/:lessonId', lessonController.updateLesson);
+router.get('/lesson/school/:schoolId', lessonController.getAllLessons);
 
 //library routes - post library automatically created when user is created
 router.get('/library/:userId', libraryController.getLessons);

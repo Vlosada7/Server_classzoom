@@ -50,6 +50,7 @@ router.post('/lesson', lessonController.createLesson);
 router.get('/lesson/:lessonId', lessonController.getLesson);
 router.delete('/lesson/:lessonId', lessonController.deleteLesson);
 router.put('/lesson/:lessonId', lessonController.updateLesson);
+router.get('/lesson/school/:schoolId', lessonController.getAllLessons);
 //library routes - post library automatically created when user is created
 router.get('/library/:userId', libraryController.getLessons);
 router.get('/library/:userId/:lessonId', libraryController.getLesson);
@@ -61,10 +62,6 @@ router.get('/noteBook/:userId/:lessonId', noteBookController.getOneLessonNote);
 router.get('/noteBook/:userId', noteBookController.getAllUserNotes);
 router.delete('/noteBook/:userId/:lessonId', noteBookController.deleteNote);
 router.put('/noteBook', noteBookController.updateNote);
-//whiteboard routes
-// router.post('/whiteboard/:lessonId', whiteboardController.createWhiteboard);
-// router.put('/whiteboard/:lessonId', whiteboardController.addToken);
-// router.get('/whiteboard/:lessonId', whiteboardController.getToken);
 //Agora Whiteboardroom Token
 router.get('/roomToken/teacher/:lessonId', roomTokenController.createOrGetToken); // for the teacher
 router.get('/roomToken/student/:lessonId', roomTokenController.getTokenForStudent); // for the student

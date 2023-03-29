@@ -31,29 +31,24 @@ dotenv.config();
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const router_1 = __importDefault(require("./router"));
-const monitor_1 = require("@colyseus/monitor");
-const MySchool_1 = require("./colyseus/MySchool");
-const colyseus_1 = require("colyseus");
-const http_1 = require("http");
-const ws_transport_1 = require("@colyseus/ws-transport");
-const PORT = 3030;
-const gamePort = 4001;
+const PORT = 3031;
+// const gamePort = 4001;
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(router_1.default);
-//colyseus multiplayer
-const server = (0, http_1.createServer)();
-const gameServer = new colyseus_1.Server({
-    transport: new ws_transport_1.WebSocketTransport({
-        server, // provide the custom server for `WebSocketTransport`
-    }),
-});
-gameServer.define('my_school', MySchool_1.MySchool);
-app.use('/colyseus', (0, monitor_1.monitor)());
-gameServer.listen(gamePort);
-app.use('/', (req, res) => {
-    console.log('Just got a request!');
-    res.send('Vaaaaaaaai filhão, meu primeiro server rodando na internet caralhoooo');
-});
+// //colyseus multiplayer
+// const server = createServer();
+// const gameServer = new Server({
+//   transport: new WebSocketTransport({
+//     server, // provide the custom server for `WebSocketTransport`
+//   }),
+// });
+// gameServer.define('my_school', MySchool);
+// app.use('/colyseus', monitor());
+// gameServer.listen(gamePort);
+// app.use('/', (req, res) => {
+//   console.log('Just got a request!');
+//   res.send('Vaaaaaaaai filhão, meu primeiro server rodando na internet caralhoooo');
+// });
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));

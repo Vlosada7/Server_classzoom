@@ -26,7 +26,8 @@ const createSchool = async (req: Request, res: Response) => {
 };
 
 const getSchool = async (req: Request, res: Response) => {
-  const {id} = req.params;
+  const { id } = req.params;
+  console.log('hi');
   try {
     const school = await prisma.school.findUnique({
       where: {
@@ -44,4 +45,4 @@ const getSchool = async (req: Request, res: Response) => {
   }
 };
 
-export { createSchool, getSchool };
+export { createSchool, getSchool };    

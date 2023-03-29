@@ -40,6 +40,7 @@ const createSchool = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.createSchool = createSchool;
 const getSchool = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
+    console.log('hi');
     try {
         const school = yield database_1.prisma.school.findUnique({
             where: {
